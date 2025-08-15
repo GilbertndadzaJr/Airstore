@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Airstore - Social Commerce Platform</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+    }
+    /* Landing Page */
+    #landing {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, #4cafef, #004aad);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    #landing h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    #landing button {
+      padding: 10px 20px;
+      border: none;
+      background: white;
+      color: #004aad;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    /* Layout */
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: #004aad;
+      color: white;
+      padding: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .sidebar h2 {
+      margin-bottom: 1rem;
+    }
+    .sidebar ul {
+      list-style: none;
+    }
+    .sidebar ul li {
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .search-icon {
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    #search-bar {
+      display: none;
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 1rem;
+    }
+    .map-section {
+      background: white;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+    .button-group button {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      background: #004aad;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .sub-buttons {
+      display: none;
+      margin-top: 5px;
+    }
+    .sub-buttons button {
+      background: #0066cc;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+      }
+      .sidebar.active {
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="landing">
+    <h1>Welcome to Airstore</h1>
+    <p>Your social commerce hub</p>
+    <button onclick="enterSite()">Enter Site</button>
+  </div>
+
+  <div class="container">
+    <nav class="sidebar" id="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li>Home</li>
+        <li>Shopping</li>
+        <li>Contact</li>
+        <li>About</li>
+        <li>Profile</li>
+        <li>Cart</li>
+      </ul>
+    </nav>
+    <div class="main">
+      <header>
+        <span class="search-icon" onclick="toggleSearch()">🔍</span>
+        <input type="text" id="search-bar" placeholder="Search..." onkeyup="showSuggestions(this.value)" />
+        <button onclick="toggleMenu()">☰</button>
+      </header>
+
+      <div class="map-section">
+        <h3>Our Location</h3>
+        <iframe src="https://maps.google.com/maps?q=New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="200"></iframe>
+        <div class="button-group">
+          <button onclick="toggleSubButtons('food')">Food</button>
+          <div class="sub-buttons" id="food">
+            <button>Pizza</button>
+            <button>Burgers</button>
+          </div>
+
+          <button onclick="toggleSubButtons('clothes')">Clothes</button>
+          <div class="sub-buttons" id="clothes">
+            <button>Shirts</button>
+            <button>Shoes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function enterSite() {
+      document.getElementById('landing').style.display = 'none';
+    }
+    function toggleMenu() {
+      document.getElementById('sidebar').classList.toggle('active');
+    }
+    function toggleSearch() {
+      const search = document.getElementById('search-bar');
+      if (search.style.display === 'block') {
+        search.style.display = 'none';
+      } else {
+        search.style.display = 'block';
+        search.focus();
+      }
+    }
+    function toggleSubButtons(id) {
+      const section = document.getElementById(id);
+      section.style.display = section.style.display === 'block' ? 'none' : 'block';
+    }
+    function showSuggestions(value) {
+      console.log('Suggestions for:', value);
+      // Implement suggestions logic if needed
+    }
+  </script>
+</body>
+</html>
